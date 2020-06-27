@@ -14,8 +14,15 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+// NG
+app.use(express.json());
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+// NG
+const testRoutes = require('./routes/strings');
+app.use('/api/strings', testRoutes);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
