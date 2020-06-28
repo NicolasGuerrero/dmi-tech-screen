@@ -7,13 +7,14 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+// import { Helmet } from 'react-helmet';
+// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import StringsList from 'components/StringsList';
 import {
   makeSelectStrings,
   makeSelectStringsLoading,
@@ -21,11 +22,11 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+// import messages from './messages';
 
 import { loadStrings } from './actions';
 // NG - Need to add in {strings, loading, error} into props
-export function Strings({ onStart }) {
+export function Strings({ strings, loading, error, onStart }) {
   useInjectReducer({ key: 'strings', reducer });
   useInjectSaga({ key: 'strings', saga });
 
@@ -33,19 +34,15 @@ export function Strings({ onStart }) {
     onStart();
   }, []);
 
-  // const stringsListProps = {
-  //   loading,
-  //   error,
-  //   strings,
-  // };
+  const stringsListProps = {
+    loading,
+    error,
+    strings,
+  };
 
   return (
     <div>
-      <Helmet>
-        <title>Strings</title>
-        <meta name="description" content="Description of Strings" />
-      </Helmet>
-      <FormattedMessage {...messages.header} />
+      <StringsList {...stringsListProps} />
     </div>
   );
 }
