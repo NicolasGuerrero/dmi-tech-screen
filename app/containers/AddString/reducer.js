@@ -4,15 +4,42 @@
  *
  */
 import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+import {
+  CHANGE_STRING_INPUT,
+  ADD_STRING,
+  ADD_STRING_SUCCESS,
+  ADD_STRING_ERROR,
+} from './constants';
 
-export const initialState = {};
+export const initialState = {
+  adding: false,
+  error: false,
+  added: false,
+  string: '',
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const addStringReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
+  produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case CHANGE_STRING_INPUT:
+        draft.string = action.string;
+        break;
+
+      case ADD_STRING:
+        draft.adding = true;
+        draft.error = false;
+        break;
+
+      case ADD_STRING_SUCCESS:
+        draft.string = action.string;
+        draft.adding = false;
+        draft.added = true;
+        break;
+
+      case ADD_STRING_ERROR:
+        draft.error = action.error;
+        draft.adding = false;
         break;
     }
   });
