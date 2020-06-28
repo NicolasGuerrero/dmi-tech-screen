@@ -30,7 +30,7 @@ const makeSelectStringsLoading = () =>
 const makeSelectStringsError = () =>
   createSelector(
     selectStringsDomain,
-    substate => substate.loading,
+    substate => substate.error,
   );
 export {
   selectStringsDomain,
