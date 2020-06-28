@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -14,14 +14,30 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectStrings from './selectors';
+import {
+  makeSelectStrings,
+  makeSelectStringsLoading,
+  makeSelectStringsError,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export function Strings() {
+import { loadStrings } from './actions';
+// NG - Need to add in {strings, loading, error} into props
+export function Strings({ onStart }) {
   useInjectReducer({ key: 'strings', reducer });
   useInjectSaga({ key: 'strings', saga });
+
+  useEffect(() => {
+    onStart();
+  }, []);
+
+  // const stringsListProps = {
+  //   loading,
+  //   error,
+  //   strings,
+  // };
 
   return (
     <div>
@@ -35,16 +51,21 @@ export function Strings() {
 }
 
 Strings.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  strings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  onStart: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   strings: makeSelectStrings(),
+  loading: makeSelectStringsLoading(),
+  error: makeSelectStringsError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onStart: () => dispatch(loadStrings()),
   };
 }
 

@@ -6,7 +6,7 @@ import request from 'utils/request';
 
 // Individual exports for testing
 export function* getStrings() {
-  const requestURL = '/api/strings';
+  const requestURL = `/api/strings`;
 
   try {
     const strings = yield call(request, requestURL);
