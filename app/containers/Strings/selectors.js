@@ -18,8 +18,23 @@ const selectStringsDomain = state => state.strings || initialState;
 const makeSelectStrings = () =>
   createSelector(
     selectStringsDomain,
-    substate => substate,
+    substate => substate.strings,
   );
 
-export default makeSelectStrings;
-export { selectStringsDomain };
+const makeSelectStringsLoading = () =>
+  createSelector(
+    selectStringsDomain,
+    substate => substate.loading,
+  );
+
+const makeSelectStringsError = () =>
+  createSelector(
+    selectStringsDomain,
+    substate => substate.loading,
+  );
+export {
+  selectStringsDomain,
+  makeSelectStrings,
+  makeSelectStringsLoading,
+  makeSelectStringsError,
+};
