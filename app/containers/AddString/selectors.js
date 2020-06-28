@@ -18,8 +18,31 @@ const selectAddStringDomain = state => state.addString || initialState;
 const makeSelectAddString = () =>
   createSelector(
     selectAddStringDomain,
-    substate => substate,
+    substate => substate.string,
   );
 
-export default makeSelectAddString;
-export { selectAddStringDomain };
+const makeSelectAddStringAdding = () =>
+  createSelector(
+    selectAddStringDomain,
+    substate => substate.adding,
+  );
+
+const makeSelectAddStringAdded = () =>
+  createSelector(
+    selectAddStringDomain,
+    substate => substate.added,
+  );
+
+const makeSelectAddStringError = () =>
+  createSelector(
+    selectAddStringDomain,
+    substate => substate.error,
+  );
+
+export {
+  selectAddStringDomain,
+  makeSelectAddString,
+  makeSelectAddStringAdding,
+  makeSelectAddStringAdded,
+  makeSelectAddStringError,
+};
