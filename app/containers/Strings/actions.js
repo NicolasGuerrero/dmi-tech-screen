@@ -4,10 +4,28 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import {
+  LOAD_STRINGS,
+  LOAD_STRINGS_SUCCESS,
+  LOAD_STRINGS_ERROR,
+} from './constants';
 
-export function defaultAction() {
+export function loadStrings() {
   return {
-    type: DEFAULT_ACTION,
+    type: LOAD_STRINGS,
+  };
+}
+
+export function stringsLoaded(strings) {
+  return {
+    type: LOAD_STRINGS_SUCCESS,
+    strings,
+  };
+}
+
+export function stringsLoadingError(error) {
+  return {
+    type: LOAD_STRINGS_ERROR,
+    error,
   };
 }
