@@ -20,7 +20,7 @@ export function* getStrings() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* githubData() {
+export default function* stringsData() {
   // Watches for LOAD_STRINGS actions and calls getStrings when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
