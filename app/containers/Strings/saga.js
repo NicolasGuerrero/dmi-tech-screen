@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_STRINGS } from 'containers/Strings/constants';
 import { stringsLoaded, stringsLoadingError } from 'containers/Strings/actions';
-
 import request from 'utils/request';
 
 // Individual exports for testing
