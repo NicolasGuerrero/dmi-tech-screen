@@ -29,7 +29,7 @@ export function* addString() {
  * Root saga manages watcher lifecycle
  */
 export default function* addStringData() {
-  // Watches for LOAD_STRINGS actions and calls getStrings when one comes in.
+  // Watches for ADD_STRING actions and calls addString when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
