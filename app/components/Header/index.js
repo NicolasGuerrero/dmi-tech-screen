@@ -11,10 +11,20 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+import NavBar from './NavBar';
+import HeaderLink from './HeaderLink';
+
 function Header() {
   return (
     <div>
-      <FormattedMessage {...messages.header} />
+      <NavBar>
+        <HeaderLink to="/">
+          <FormattedMessage {...messages.strings} />
+        </HeaderLink>
+        <HeaderLink to="/add">
+          <FormattedMessage {...messages.add} />
+        </HeaderLink>
+      </NavBar>
     </div>
   );
 }

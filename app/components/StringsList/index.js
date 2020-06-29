@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
 function StringsList({ loading, error, strings }) {
   if (loading) {
@@ -20,7 +21,7 @@ function StringsList({ loading, error, strings }) {
       <div>
         <ul>
           {strings.map(string => (
-            <li>{string}</li>
+            <li key={uuid()}>{string}</li>
           ))}
         </ul>
       </div>
