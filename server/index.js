@@ -15,6 +15,7 @@ const { resolve } = require('path');
 const app = express();
 
 // NG
+
 app.use(express.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here

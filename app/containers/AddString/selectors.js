@@ -18,7 +18,7 @@ const selectAddStringDomain = state => state.addString || initialState;
 const makeSelectAddString = () =>
   createSelector(
     selectAddStringDomain,
-    substate => substate.string,
+    substate => substate.newString,
   );
 
 const makeSelectAddStringAdding = () =>

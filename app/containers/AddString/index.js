@@ -7,44 +7,70 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectAddString from './selectors';
+import {
+  makeSelectAddString,
+  makeSelectAddStringAdding,
+  makeSelectAddStringAdded,
+  makeSelectAddStringError,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+import Form from './Form';
+import Input from './Input';
+import { changeStringInput, addString } from './actions';
 
-export function AddString() {
+// not using adding, added, and error as props yet. need to use/put back in
+export function AddString({ newString, onSubmitForm, onChangeString }) {
   useInjectReducer({ key: 'addString', reducer });
   useInjectSaga({ key: 'addString', saga });
 
   return (
     <div>
-      <Helmet>
-        <title>AddString</title>
-        <meta name="description" content="Description of AddString" />
-      </Helmet>
-      <FormattedMessage {...messages.header} />
+      <Form onSubmit={onSubmitForm}>
+        <label htmlFor="newString">
+          <Input
+            id="newString"
+            type="text"
+            placeholder="Enter a string"
+            value={newString}
+            onChange={onChangeString}
+          />
+        </label>
+      </Form>
     </div>
   );
 }
 
 AddString.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // adding: PropTypes.bool,
+  // added: PropTypes.bool,
+  // error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  onSubmitForm: PropTypes.func,
+  newString: PropTypes.string,
+  onChangeString: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  addString: makeSelectAddString(),
+  newString: makeSelectAddString(),
+  adding: makeSelectAddStringAdding(),
+  added: makeSelectAddStringAdded(),
+  error: makeSelectAddStringError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onChangeString: evt => dispatch(changeStringInput(evt.target.value)),
+    onSubmitForm: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(addString());
+      dispatch(changeStringInput(''));
+    },
   };
 }
 

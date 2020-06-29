@@ -11,10 +11,11 @@ import {
   ADD_STRING_ERROR,
 } from './constants';
 
-export function changeStringInput(string) {
+export function changeStringInput(newString) {
+  console.log('string from actions', newString);
   return {
     type: CHANGE_STRING_INPUT,
-    string,
+    newString,
   };
 }
 

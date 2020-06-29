@@ -23,7 +23,7 @@ const addStringReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_STRING_INPUT:
-        draft.string = action.string;
+        draft.newString = action.newString;
         break;
 
       case ADD_STRING:

@@ -13,11 +13,11 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   try {
-    const { inputStr } = req.body;
+    const { inputString } = req.body;
+    console.log(`from server`, inputString);
+    if (!inputString) throw new Error('Please submit a string.');
 
-    if (!inputStr) throw new Error('Please submit a string.');
-
-    strData.unshift(inputStr);
+    strData.unshift(inputString);
     return res.json(strData[0]);
   } catch (err) {
     return next(err);
