@@ -14,19 +14,22 @@ import Strings from 'containers/Strings/Loadable';
 import AddString from 'containers/AddString/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
+import AppWrapper from './AppWrapper';
 
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
   return (
     <div>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Strings} />
-        <Route exact path="/add" component={AddString} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
+      <AppWrapper>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Strings} />
+          <Route exact path="/add" component={AddString} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        <GlobalStyle />
+      </AppWrapper>
     </div>
   );
 }

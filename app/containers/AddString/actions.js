@@ -5,14 +5,19 @@
  */
 
 import {
+  ADD_STRING_RESET,
   CHANGE_STRING_INPUT,
   ADD_STRING,
   ADD_STRING_SUCCESS,
   ADD_STRING_ERROR,
 } from './constants';
 
+export function addStringReset() {
+  return {
+    type: ADD_STRING_RESET,
+  };
+}
 export function changeStringInput(newString) {
-  console.log('string from actions', newString);
   return {
     type: CHANGE_STRING_INPUT,
     newString,

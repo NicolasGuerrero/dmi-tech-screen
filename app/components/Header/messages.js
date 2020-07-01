@@ -15,6 +15,6 @@ export default defineMessages({
   },
   add: {
     id: `${scope}.add`,
-    defaultMessage: 'Add A String',
+    defaultMessage: 'Add String',
   },
 });

@@ -1,7 +1,12 @@
 const express = require('express');
 const router = new express.Router();
 
-const strData = ['String 1', 'String 2', 'String 3', 'String 4'];
+const strData = [
+  'Default String 1',
+  'Default String 2',
+  'Default String 3',
+  'Default String 4',
+];
 
 router.get('/', (req, res, next) => {
   try {
@@ -14,7 +19,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   try {
     const { inputString } = req.body;
-    console.log(`from server`, inputString);
+
     if (!inputString) throw new Error('Please submit a string.');
 
     strData.unshift(inputString);

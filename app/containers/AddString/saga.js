@@ -10,7 +10,6 @@ export function* addString() {
 
   const inputString = yield select(makeSelectAddString());
   const requestURL = `/api/strings`;
-  console.log('inputString at saga', inputString);
   const options = {
     method: 'POST',
     headers: {
@@ -20,11 +19,9 @@ export function* addString() {
   };
   try {
     const addedString = yield call(request, requestURL, options);
-    // const addedString = yield call(() =>
-    //   axios.post(requestURL, { inputString }),
-    // );
     yield put(stringAdded(addedString));
   } catch (err) {
+    console.log('from saga', err);
     yield put(stringAddingError(err));
   }
 }

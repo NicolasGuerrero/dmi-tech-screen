@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
+import Ul from './Ul';
 
 function StringsList({ loading, error, strings }) {
   if (loading) {
@@ -19,11 +20,11 @@ function StringsList({ loading, error, strings }) {
   if (strings !== false) {
     return (
       <div>
-        <ul>
+        <Ul>
           {strings.map(string => (
             <li key={uuid()}>{string}</li>
           ))}
-        </ul>
+        </Ul>
       </div>
     );
   }

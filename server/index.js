@@ -22,8 +22,8 @@ app.use(express.json());
 // app.use('/api', myApi);
 
 // NG
-const testRoutes = require('./routes/strings');
-app.use('/api/strings', testRoutes);
+const stringsBackend = require('./strings');
+app.use('/api/strings', stringsBackend);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

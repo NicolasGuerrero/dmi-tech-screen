@@ -9,7 +9,6 @@ export function* getStrings() {
 
   try {
     const strings = yield call(request, requestURL);
-    console.log(strings);
     yield put(stringsLoaded(strings));
   } catch (err) {
     yield put(stringsLoadingError(err));

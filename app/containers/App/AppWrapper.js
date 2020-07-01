@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export default styled.div`
+const AppWrapper = styled.div`
   text-align: center;
-  margin-bottom: 25px;
 `;
+
+export default AppWrapper;

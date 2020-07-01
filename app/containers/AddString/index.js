@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -13,6 +13,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import Notifications from 'components/Notifications';
 import {
   makeSelectAddString,
   makeSelectAddStringAdding,
@@ -23,12 +24,25 @@ import reducer from './reducer';
 import saga from './saga';
 import Form from './Form';
 import Input from './Input';
-import { changeStringInput, addString } from './actions';
+import { changeStringInput, addString, addStringReset } from './actions';
 
-// not using adding, added, and error as props yet. need to use/put back in
-export function AddString({ newString, onSubmitForm, onChangeString }) {
+export function AddString({
+  adding,
+  added,
+  error,
+  newString,
+  onSubmitForm,
+  onChangeString,
+  reset,
+}) {
   useInjectReducer({ key: 'addString', reducer });
   useInjectSaga({ key: 'addString', saga });
+
+  useEffect(() => {
+    reset();
+  }, []);
+
+  const notificationProps = { adding, added, error };
 
   return (
     <div>
@@ -38,22 +52,25 @@ export function AddString({ newString, onSubmitForm, onChangeString }) {
             id="newString"
             type="text"
             placeholder="Enter a string"
-            value={newString}
+            value={newString || ''}
             onChange={onChangeString}
           />
+          <button type="submit">Submit</button>
         </label>
       </Form>
+      <Notifications {...notificationProps} />
     </div>
   );
 }
 
 AddString.propTypes = {
-  // adding: PropTypes.bool,
-  // added: PropTypes.bool,
-  // error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  adding: PropTypes.bool,
+  added: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   newString: PropTypes.string,
   onChangeString: PropTypes.func,
+  reset: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -65,6 +82,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    reset: () => dispatch(addStringReset()),
     onChangeString: evt => dispatch(changeStringInput(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();

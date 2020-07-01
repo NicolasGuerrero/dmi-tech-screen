@@ -7,8 +7,6 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -22,10 +20,9 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
 
 import { loadStrings } from './actions';
-// NG - Need to add in {strings, loading, error} into props
+
 export function Strings({ strings, loading, error, onStart }) {
   useInjectReducer({ key: 'strings', reducer });
   useInjectSaga({ key: 'strings', saga });
