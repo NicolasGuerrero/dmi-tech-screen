@@ -16,7 +16,7 @@ export const initialState = {
   adding: false,
   error: false,
   added: false,
-  string: '',
+  newString: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -27,7 +27,7 @@ const addStringReducer = (state = initialState, action) =>
         draft.adding = false;
         draft.error = false;
         draft.added = false;
-        draft.string = '';
+        draft.newString = '';
         break;
 
       case CHANGE_STRING_INPUT:
@@ -43,7 +43,6 @@ const addStringReducer = (state = initialState, action) =>
         break;
 
       case ADD_STRING_SUCCESS:
-        draft.string = action.string;
         draft.adding = false;
         draft.error = false;
         draft.added = true;

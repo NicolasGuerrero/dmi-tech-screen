@@ -6,17 +6,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import Notification from './Notification';
 
 function Notifications({ adding, added, error }) {
+  let color;
   if (adding) {
     return <div>Adding...</div>;
   }
   if (added) {
-    return <div>Successfuly added string.</div>;
+    color = 'green';
+    return <Notification color={color}>Successfuly added string</Notification>;
   }
   if (error !== false) {
-    return <div>Error: Please try again.</div>;
+    color = 'red';
+    return <Notification color={color}>Error: Please try again</Notification>;
   }
   return null;
 }

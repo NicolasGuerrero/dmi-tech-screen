@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import Notifications from 'components/Notifications';
+import AddStringNotifications from 'components/AddStringNotifications';
 import {
   makeSelectAddString,
   makeSelectAddStringAdding,
@@ -27,10 +27,10 @@ import Input from './Input';
 import { changeStringInput, addString, addStringReset } from './actions';
 
 export function AddString({
+  newString,
   adding,
   added,
   error,
-  newString,
   onSubmitForm,
   onChangeString,
   reset,
@@ -51,14 +51,14 @@ export function AddString({
           <Input
             id="newString"
             type="text"
-            placeholder="Enter a string"
-            value={newString || ''}
+            placeholder="Enter a string..."
+            value={newString}
             onChange={onChangeString}
           />
           <button type="submit">Submit</button>
         </label>
       </Form>
-      <Notifications {...notificationProps} />
+      <AddStringNotifications {...notificationProps} />
     </div>
   );
 }
@@ -69,8 +69,8 @@ AddString.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   newString: PropTypes.string,
-  onChangeString: PropTypes.func,
   reset: PropTypes.func,
+  onChangeString: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -80,15 +80,15 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectAddStringError(),
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
-    reset: () => dispatch(addStringReset()),
     onChangeString: evt => dispatch(changeStringInput(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(addString());
       dispatch(changeStringInput(''));
     },
+    reset: () => dispatch(addStringReset()),
   };
 }
 

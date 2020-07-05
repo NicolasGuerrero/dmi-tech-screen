@@ -21,7 +21,6 @@ export function* addString() {
     const addedString = yield call(request, requestURL, options);
     yield put(stringAdded(addedString));
   } catch (err) {
-    console.log('from saga', err);
     yield put(stringAddingError(err));
   }
 }

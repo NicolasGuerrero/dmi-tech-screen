@@ -7,7 +7,10 @@ describe('addStringReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      adding: false,
+      error: false,
+      added: false,
+      newString: '',
     };
   });
 

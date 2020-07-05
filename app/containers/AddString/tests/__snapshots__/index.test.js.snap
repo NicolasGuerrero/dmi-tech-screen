@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddString /> should render and match the snapshot 1`] = `
+<div>
+  <form
+    class="Form-sc-148ipml-0 hVyDgC"
+  >
+    <label
+      for="newString"
+    >
+      <input
+        class="Input-i9rmlz-0 caCtWU"
+        id="newString"
+        placeholder="Enter a string..."
+        type="text"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </label>
+  </form>
+  <span
+    class="Notification-sc-1hp5mlj-0 jVPNLJ"
+    color="red"
+  >
+    Error: Please try again
+  </span>
+</div>
+`;

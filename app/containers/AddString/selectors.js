@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the addString state domain
  */
 
-const selectAddStringDomain = state => state.addString || initialState;
+const selectAddString = state => state.addString || initialState;
 
 /**
  * Other specific selectors
@@ -17,30 +17,30 @@ const selectAddStringDomain = state => state.addString || initialState;
 
 const makeSelectAddString = () =>
   createSelector(
-    selectAddStringDomain,
+    selectAddString,
     substate => substate.newString,
   );
 
 const makeSelectAddStringAdding = () =>
   createSelector(
-    selectAddStringDomain,
+    selectAddString,
     substate => substate.adding,
   );
 
 const makeSelectAddStringAdded = () =>
   createSelector(
-    selectAddStringDomain,
+    selectAddString,
     substate => substate.added,
   );
 
 const makeSelectAddStringError = () =>
   createSelector(
-    selectAddStringDomain,
+    selectAddString,
     substate => substate.error,
   );
 
 export {
-  selectAddStringDomain,
+  selectAddString,
   makeSelectAddString,
   makeSelectAddStringAdding,
   makeSelectAddStringAdded,
