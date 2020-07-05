@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
 
-function Notifications({ adding, added, error }) {
+function AddStringNotifications({ adding, added, error }) {
   let color;
   if (adding) {
     return <div>Adding...</div>;
@@ -24,10 +24,10 @@ function Notifications({ adding, added, error }) {
   return null;
 }
 
-Notifications.propTypes = {
+AddStringNotifications.propTypes = {
   adding: PropTypes.bool,
   added: PropTypes.bool,
   error: PropTypes.any,
 };
 
-export default Notifications;
+export default AddStringNotifications;
